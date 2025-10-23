@@ -1,4 +1,6 @@
-package Configuracion;
+package Configuracion.Estructuras;
+
+import Configuracion.Estructuras.NodoGenerico;
 
 
 public class PilaConfiguracion <T> {
@@ -6,23 +8,27 @@ public class PilaConfiguracion <T> {
     
     NodoGenerico <T> cima;
 
-    public PilaConfiguracion(NodoGenerico cima) {
+    public PilaConfiguracion () {
         this.cima = null;
     }
     
     public void push (T dato){
-            NodoGenerico nuevoNodo= new NodoGenerico (dato);
+            NodoGenerico<T> nuevoNodo= new NodoGenerico (dato);
             nuevoNodo.setSiguiente(cima);
             cima=nuevoNodo;    
     }
     
-    public void peek (){
+    public T peek (){
+        T dato=null;
         if(cima==null){
             System.out.println("La pila esta vacia");
+            return dato;
         }else{
-            cima.getDato();
+           dato= cima.getDato();
+           return dato;
         }
     }
+    
     
     public T pop (){
         if (cima==null){
@@ -34,6 +40,19 @@ public class PilaConfiguracion <T> {
             return dato;  
         }
                 
+    }
+    
+    
+    public String Mostrar (){
+        
+        StringBuilder sb= new StringBuilder ();
+        NodoGenerico <T> actual= cima;
+        while (actual!=null){
+            sb.append(actual.getDato()).append(",");
+            actual= actual.getSiguiente();   
+        }
+     
+        return sb.toString();
     }
     
     

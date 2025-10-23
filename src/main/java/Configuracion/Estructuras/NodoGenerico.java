@@ -1,5 +1,5 @@
 
-package Configuracion;
+package Configuracion.Estructuras;
 
 
 public class NodoGenerico <T> {
