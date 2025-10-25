@@ -6,14 +6,14 @@ import Configuracion.Estructuras.NodoGenerico;
 public class PilaConfiguracion <T> {
     
     
-    NodoGenerico <T> cima;
+    private NodoGenerico <T> cima;
 
     public PilaConfiguracion () {
         this.cima = null;
     }
     
-    public void push (T dato){
-            NodoGenerico<T> nuevoNodo= new NodoGenerico (dato);
+    public void push (T newDato){
+            NodoGenerico<T> nuevoNodo= new NodoGenerico (newDato);
             nuevoNodo.setSiguiente(cima);
             cima=nuevoNodo;    
     }

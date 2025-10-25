@@ -1,11 +1,11 @@
 
-package Configuracion.objetos;
+package Configuracion.clases;
 
 public class Bus {
     
     
     //Atributos de clase
-    
+     
     String tipo;
     Bus bus;
     

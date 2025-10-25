@@ -1,7 +1,7 @@
 
 package Configuracion.Estructuras;
 
-import Configuracion.objetos.Bus;
+import Configuracion.clases.Bus;
 
 
 public class ColaBus {
@@ -10,8 +10,8 @@ public class ColaBus {
     Bus busFinal;
 
     public ColaBus() {
-        this.busInicial = busInicial;
-        this.busFinal = busFinal;
+        this.busInicial = null;
+        this.busFinal = null;
     }
 
     public ColaBus(Bus busInicial, Bus busFinal) {

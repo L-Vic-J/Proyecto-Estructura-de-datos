@@ -1,5 +1,5 @@
 
-package Configuracion.objetos;
+package Configuracion.clases;
 
 public class Usuario {
     
