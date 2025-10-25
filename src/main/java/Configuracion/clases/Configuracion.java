@@ -8,7 +8,7 @@ import Configuracion.Serializacion.SerializacionPila;
 
 public class Configuracion {
     
-    //Pilas estaticas
+    //Pilas 
     
     public PilaConfiguracion <Terminal> pilaTerminal = new PilaConfiguracion <> ();
     public PilaConfiguracion <Usuario> pilaUsuario= new PilaConfiguracion <> ();
