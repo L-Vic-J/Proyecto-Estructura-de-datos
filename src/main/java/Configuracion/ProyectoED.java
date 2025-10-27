@@ -11,9 +11,8 @@ import Configuracion.clases.Usuario;
 public class ProyectoED {
 
     public static void main(String[] args) {
-
-        
- 
-        
+                    
+                
+                
     }
 }

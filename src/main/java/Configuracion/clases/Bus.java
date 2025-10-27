@@ -1,4 +1,3 @@
-
 package Configuracion.clases;
 
 public class Bus {

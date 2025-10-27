@@ -10,7 +10,7 @@ import java.io.FileWriter;
 
 
 public class SerializacionPila {
-     //Pila+nombre de archivo
+    //Pila+nombre de archivo
     //Equivalente a guardar en el JSON
      public void serializarPila(PilaConfiguracion pilaTerminal,PilaConfiguracion pilaUsuarios, String archivo){
         Gson gson = new GsonBuilder().create();

@@ -8,7 +8,7 @@ public class ColaBus {
     
     Bus busInicial;
     Bus busFinal;
-
+ 
     public ColaBus() {
         this.busInicial = null;
         this.busFinal = null;
