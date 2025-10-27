@@ -14,46 +14,54 @@ public class ColaPrioridades {
         this.tiqueteFin = null;
     }
 
-    //  Encolar con prioridad y hora automática
     public void Encolar(String nombre, int id, int edad, double moneda, String servicio, String tipoBus, String prioridad) {
 
-        // Generar hora actual del sistema
         String horaActual = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-        // Crear nuevo tiquete con hora de compra actual
         Tiquetes nuevo = new Tiquetes(null, nombre, id, edad, moneda, horaActual, "Pendiente", servicio, tipoBus, prioridad);
 
-        // Si la cola está vacía
         if (tiqueteInicio == null) {
+            // El nuevo tiquete se convierte tanto en el inicio como en el fin de la cola
             tiqueteInicio = nuevo;
             tiqueteFin = nuevo;
-            return;
+            return; // Termina el método aquí
         }
 
-        // Insertar según prioridad simple (Alta,  Media,  Baja)
-        if (prioridad.equalsIgnoreCase("Alta")) {
-            // Insertar al inicio
+        if (prioridad.equalsIgnoreCase("P")) {
+            // Se inserta al inicio de la cola
+            // El nuevo tiquete apunta al que actualmente está de primero
             nuevo.setSiguiente(tiqueteInicio);
+            // Ahora el nuevo tiquete pasa a ser el primero
             tiqueteInicio = nuevo;
-        } else if (prioridad.equalsIgnoreCase("Media")) {
-            // Insertar después del último "Alta"
-            Tiquetes actual = tiqueteInicio;
-            Tiquetes anterior = null;
+        } else if (prioridad.equalsIgnoreCase("D")) {
+            // Se debe insertar despues de los de prioridad "Alta", pero antes de los "Baja"
+
+            // Se recorren los tiquetes desde el inicio
+            Tiquetes actual = tiqueteInicio;   // Apunta al primer nodo
+            Tiquetes anterior = null;          // Mantiene referencia al nodo anterior
+
+            // Mientras haya tiquetes y su prioridad sea "Alta", seguimos avanzando
             while (actual != null && actual.getPrioridad().equalsIgnoreCase("Alta")) {
                 anterior = actual;
-                actual = actual.getSiguiente();
+                actual = actual.getSiguiente(); // Avanza al siguiente nodo
             }
+
+            
+            // Si 'anterior' sigue siendo null, significa que no había tiquetes "Alta"
+            // Entonces el nuevo se inserta al inicio
             if (anterior == null) {
                 nuevo.setSiguiente(tiqueteInicio);
                 tiqueteInicio = nuevo;
-            } else {
+            } // Si no, se inserta entre el último "Alta" y el siguiente (que puede ser Media o Baja)
+            else {
                 anterior.setSiguiente(nuevo);
                 nuevo.setSiguiente(actual);
             }
-        } else {
-            // Insertar al final (Baja)
-            tiqueteFin.setSiguiente(nuevo);
-            tiqueteFin = nuevo;
+        } //  Prioridad "Baja"
+        else {
+            // Se inserta al final de la cola, ya que los de prioridad baja van de últimos
+            tiqueteFin.setSiguiente(nuevo); // El último tiquete actual apunta al nuevo
+            tiqueteFin = nuevo;              // El nuevo pasa a ser el nuevo "final" de la cola
         }
     }
 

@@ -9,7 +9,7 @@ public class Tiquetes {
     private double moneda;
     private String horaCompra;
     private String horaAbordaje;
-    private String servicio;
+    private String servicio = "NA";
     private String tipoBus;
     private String prioridad;
 
@@ -107,4 +107,19 @@ public class Tiquetes {
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
+
+    public enum prioridadBus {
+        VIP,
+        Regular,
+        Carga,
+        Ejecutivo,
+    }
+    
+    public enum tipoBus {
+        P,
+        D,
+        N
+        
+    } 
+
 }
