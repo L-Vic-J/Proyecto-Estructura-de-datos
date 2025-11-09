@@ -1,7 +1,7 @@
 
-package Configuracion.Estructuras;
+package Configuracion;
 
-import Configuracion.clases.Bus;
+import Configuracion.Bus;
 
 
 public class ColaBus {
@@ -59,6 +59,29 @@ public class ColaBus {
         }
         
         return sb.toString();
+        
+    }
+    
+    
+  public int longitud (){
+        
+        
+        if (busInicial==null){
+            System.out.println("La cola esta vacia");
+            return -1;
+        }else{
+            int contador=0;
+            Bus actual= busInicial;
+            
+            while (actual!=null){
+                contador++;
+                actual=actual.getSiguiente();
+            }
+            
+            
+        return contador;
+            
+        }
         
     }
     

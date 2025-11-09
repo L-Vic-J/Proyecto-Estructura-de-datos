@@ -1,8 +1,6 @@
 
-package Configuracion.Serializacion;
+package Configuracion;
 
-import Configuracion.Estructuras.PilaConfiguracion;
-import Configuracion.clases.Configuracion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileReader;

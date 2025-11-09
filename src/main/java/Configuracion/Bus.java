@@ -1,4 +1,4 @@
-package Configuracion.clases;
+package Configuracion;
 
 public class Bus {
     
@@ -7,7 +7,7 @@ public class Bus {
      
     String tipo;
     Bus bus;
-    
+    ColaTiquetes colaTiquetes= new ColaTiquetes();
     
   
     public Bus(String tipo) {

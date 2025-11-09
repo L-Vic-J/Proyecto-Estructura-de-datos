@@ -1,9 +1,9 @@
 
-package Configuracion.clases;
+package Configuracion;
 
-import Configuracion.Estructuras.NodoGenerico;
-import Configuracion.Estructuras.PilaConfiguracion;
-import Configuracion.Serializacion.SerializacionPila;
+import Configuracion.Terminal;
+import Tiquetes.NodoGenerico;
+import Configuracion.SerializacionPila;
 
 
 public class Configuracion {

@@ -1,12 +1,8 @@
 
-package Configuracion.Interfaces;
+package Configuracion;
 
-import Configuracion.Estructuras.NodoGenerico;
-import Configuracion.Estructuras.PilaConfiguracion;
-import Configuracion.clases.Configuracion;
-import Configuracion.clases.Terminal;
-import Configuracion.clases.Usuario;
-import Menu.Menu;
+import Tiquetes.NodoGenerico;
+import Main.Menu;
 import javax.swing.JOptionPane;
 
 

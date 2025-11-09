@@ -1,6 +1,5 @@
-package Configuracion.Estructuras;
+package Tiquetes;
 
-import Configuracion.clases.Tiquetes;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,11 +13,16 @@ public class ColaPrioridades {
         this.tiqueteFin = null;
     }
 
-    public void Encolar(String nombre, int id, int edad, double moneda, String servicio, String tipoBus, String prioridad) {
+    
+   
+    //String nombre, int edad, String moneda,
+    //String horaCompra, String servicio, String tipoBus,String terminal, double precio
+    
+    
+    // Cambio: Como parametro se pasa un objeto de tipo tiquete
+    public void Encolar(Tiquetes nuevo) {
 
-        String horaActual = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-
-        Tiquetes nuevo = new Tiquetes(null, nombre, id, edad, moneda, horaActual, "Pendiente", servicio, tipoBus, prioridad);
+       
 
         if (tiqueteInicio == null) {
             // El nuevo tiquete se convierte tanto en el inicio como en el fin de la cola
@@ -26,14 +30,16 @@ public class ColaPrioridades {
             tiqueteFin = nuevo;
             return; // Termina el método aquí
         }
+        
+        // Cambio: Se accede a los atributos del tiquete por sus getters
 
-        if (prioridad.equalsIgnoreCase("P")) {
+        if (nuevo.getTipoBus().equalsIgnoreCase("Preferencial")) {
             // Se inserta al inicio de la cola
             // El nuevo tiquete apunta al que actualmente está de primero
             nuevo.setSiguiente(tiqueteInicio);
             // Ahora el nuevo tiquete pasa a ser el primero
             tiqueteInicio = nuevo;
-        } else if (prioridad.equalsIgnoreCase("D")) {
+        } else if (nuevo.getTipoBus().equalsIgnoreCase("Directo")) {
             // Se debe insertar despues de los de prioridad "Alta", pero antes de los "Baja"
 
             // Se recorren los tiquetes desde el inicio
@@ -95,4 +101,9 @@ public class ColaPrioridades {
         sb.append("null");
         return sb.toString();
     }
+    
+    
+    
+    
+    
 }

@@ -1,7 +1,8 @@
 
-package Menu;
+package Main;
 
-import Configuracion.Interfaces.InterfazConfiguracion;
+import Configuracion.InterfazConfiguracion;
+import Tiquetes.InterfazCompraTiquetes;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -20,6 +21,8 @@ public class Menu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         buttonConfiguracion = new javax.swing.JButton();
+        buttonConfiguracion1 = new javax.swing.JButton();
+        buttonConfiguracion2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +59,20 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        buttonConfiguracion1.setText("Comprar tiquete");
+        buttonConfiguracion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfiguracion1ActionPerformed(evt);
+            }
+        });
+
+        buttonConfiguracion2.setText("Atender clientes");
+        buttonConfiguracion2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfiguracion2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -63,8 +80,11 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(buttonConfiguracion)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonConfiguracion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonConfiguracion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +92,11 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(buttonConfiguracion)
-                .addGap(0, 226, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonConfiguracion1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonConfiguracion2)
+                .addGap(0, 156, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,6 +119,16 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonConfiguracionActionPerformed
 
+    private void buttonConfiguracion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfiguracion1ActionPerformed
+        InterfazCompraTiquetes compraTiquetes = new InterfazCompraTiquetes(this);
+        compraTiquetes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_buttonConfiguracion1ActionPerformed
+
+    private void buttonConfiguracion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfiguracion2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonConfiguracion2ActionPerformed
+
    
     public static void main(String args[]) {
 
@@ -107,6 +141,8 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonConfiguracion;
+    private javax.swing.JButton buttonConfiguracion1;
+    private javax.swing.JButton buttonConfiguracion2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -1,5 +1,5 @@
 
-package Configuracion.Estructuras;
+package Tiquetes;
 
 
 public class NodoGenerico <T> {
