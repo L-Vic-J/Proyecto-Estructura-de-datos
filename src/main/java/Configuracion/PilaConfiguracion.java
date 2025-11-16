@@ -1,7 +1,7 @@
 package Configuracion;
 
-import Tiquetes.NodoGenerico;
-import Tiquetes.NodoGenerico;
+import CompraTiquetes.NodoGenerico;
+import CompraTiquetes.NodoGenerico;
 
 
 public class PilaConfiguracion <T> {
@@ -41,6 +41,41 @@ public class PilaConfiguracion <T> {
             return dato;  
         }
                 
+    }
+
+    public NodoGenerico <Terminal> buscarDato(String nombre) {
+
+        if (cima == null) {
+            System.out.println("La pila esta vacia");
+            return null;
+        } else{
+            NodoGenerico <Terminal> actual= (NodoGenerico <Terminal>)cima;
+            while (actual!=null && !actual.getDato().getNombre().equals(nombre)){
+                actual= actual.getSiguiente();
+            }
+             
+            return actual;
+            
+        }
+
+    }
+    
+      public NodoGenerico <Terminal> buscarTipoBus(String nombre) {
+          
+
+        if (cima == null) {
+            System.out.println("La pila esta vacia");
+            return null;
+        } else{
+            NodoGenerico <Terminal> actual= (NodoGenerico <Terminal>)cima;
+            while (actual!=null && !actual.getDato().getNombre().equals(nombre)){
+                actual= actual.getSiguiente();
+            }
+             
+            return actual;
+            
+        }
+
     }
     
     
@@ -102,25 +137,9 @@ public class PilaConfiguracion <T> {
     }
     
     
-    
-    
-    public NodoGenerico<Terminal> buscarTerminal (String nombre){
-        if (cima==null){
-            System.out.println("La pila esta vacia");
-            return null;
-            
-        }else{
-             NodoGenerico<Terminal> actual=(NodoGenerico<Terminal>) cima;
-             while (actual!=null && !actual.getDato().getNombre().equals(nombre)){
-                 actual= actual.getSiguiente();
-       
-             }
-             
-             return actual;
-             
-             
-        }
-     
+
     }
+    
+
      
-}
+

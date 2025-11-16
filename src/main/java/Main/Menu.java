@@ -1,8 +1,10 @@
 
 package Main;
 
+import AtencionDeClientes.GestorDeAtencion;
+import AtencionDeClientes.InterfazSeleccion;
 import Configuracion.InterfazConfiguracion;
-import Tiquetes.InterfazCompraTiquetes;
+import CompraTiquetes.InterfazCompraTiquetes;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -22,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonConfiguracion = new javax.swing.JButton();
         buttonConfiguracion1 = new javax.swing.JButton();
-        buttonConfiguracion2 = new javax.swing.JButton();
+        buttonAtender = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,10 +68,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        buttonConfiguracion2.setText("Atender clientes");
-        buttonConfiguracion2.addActionListener(new java.awt.event.ActionListener() {
+        buttonAtender.setText("Atender clientes");
+        buttonAtender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonConfiguracion2ActionPerformed(evt);
+                buttonAtenderActionPerformed(evt);
             }
         });
 
@@ -83,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonConfiguracion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonConfiguracion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(buttonAtender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,7 +97,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonConfiguracion1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonConfiguracion2)
+                .addComponent(buttonAtender)
                 .addGap(0, 156, Short.MAX_VALUE))
         );
 
@@ -120,14 +122,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonConfiguracionActionPerformed
 
     private void buttonConfiguracion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfiguracion1ActionPerformed
-        InterfazCompraTiquetes compraTiquetes = new InterfazCompraTiquetes(this);
+        InterfazCompraTiquetes compraTiquetes = new InterfazCompraTiquetes(this,gestorAtencion);
         compraTiquetes.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonConfiguracion1ActionPerformed
 
-    private void buttonConfiguracion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfiguracion2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonConfiguracion2ActionPerformed
+    private void buttonAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtenderActionPerformed
+        InterfazSeleccion interfazSeleccion = new InterfazSeleccion(this,gestorAtencion);
+        interfazSeleccion.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_buttonAtenderActionPerformed
 
    
     public static void main(String args[]) {
@@ -138,11 +142,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    GestorDeAtencion gestorAtencion= new GestorDeAtencion();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAtender;
     private javax.swing.JButton buttonConfiguracion;
     private javax.swing.JButton buttonConfiguracion1;
-    private javax.swing.JButton buttonConfiguracion2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

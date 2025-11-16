@@ -1,7 +1,8 @@
 
-package Tiquetes;
+package CompraTiquetes;
 
 
+import AtencionDeClientes.GestorDeAtencion;
 import Configuracion.Configuracion;
 import Configuracion.PilaConfiguracion;
 import Configuracion.SerializacionPila;
@@ -15,11 +16,12 @@ import javax.swing.JOptionPane;
 public class InterfazCompraTiquetes extends javax.swing.JFrame {
 
 
-    public InterfazCompraTiquetes(Menu menu) {
+    public InterfazCompraTiquetes(Menu menu,GestorDeAtencion gestorAtencion) {
 
         initComponents();
-        
+        this.gestorAtencion=gestorAtencion;
         this.menu=menu;
+        this.gestorDeCompras=new GestorDeCompras(gestorAtencion);
         
         // Se cargan los nombres de terminales registrados en el archivo config al combobox de terminales
         
@@ -153,6 +155,11 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
         jPanel1.add(comboBoxMoneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 150, -1));
 
         comboBoxTipoDeBus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preferencial", "Directo", "Normal" }));
+        comboBoxTipoDeBus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxTipoDeBusActionPerformed(evt);
+            }
+        });
         jPanel1.add(comboBoxTipoDeBus, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 150, -1));
 
         comboBoxServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VIP", "Regular", "Carga", "Ejecutivo" }));
@@ -208,7 +215,7 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
-     
+       menu.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_buttonVolverActionPerformed
 
@@ -232,8 +239,12 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
     }//GEN-LAST:event_ComprarActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-       gestor.Serializar();
+       gestorDeCompras.Serializar();
     }//GEN-LAST:event_RegistrarActionPerformed
+
+    private void comboBoxTipoDeBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoDeBusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxTipoDeBusActionPerformed
 
 
  
@@ -248,7 +259,7 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
         String moneda= String.valueOf(comboBoxMoneda.getSelectedItem());
         String servicio= String.valueOf(comboBoxServicio.getSelectedItem());
        
-        String tipoBus=String.valueOf(comboBoxTipoDeBus.getSelectedItem());
+        String tipoBus=String.valueOf(comboBoxTipoDeBus.getSelectedItem()).trim();
         
         String terminal= String.valueOf(comboBoxTerminal.getSelectedItem());
         
@@ -257,8 +268,9 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
        
         Tiquetes tiquete = new Tiquetes(nombre, edad, moneda,horaActual, servicio, tipoBus,terminal);
         
-        gestor.agregarTiquete(tiquete);
+        gestorDeCompras.agregarTiquete(tiquete);
         
+        gestorDeCompras.enviarTiquete(tiquete);
         
         
         }catch (NumberFormatException e){
@@ -283,9 +295,11 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
     
     
  private Menu menu= new Menu ();
- Configuracion configuracion= new Configuracion ();
- SerializacionPila serializacion= new SerializacionPila ();
- GestorDeCompras gestor= new GestorDeCompras();
+ private Configuracion configuracion;
+ private SerializacionPila serializacion= new SerializacionPila ();
+ private GestorDeAtencion gestorAtencion;
+ private GestorDeCompras gestorDeCompras;
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Comprar;

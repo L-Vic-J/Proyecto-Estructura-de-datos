@@ -1,44 +1,72 @@
-
 package AtencionDeClientes;
 
+import CompraTiquetes.NodoGenerico;
+import CompraTiquetes.Tiquetes;
 import Configuracion.Bus;
+import Configuracion.ColaBus;
+import Configuracion.ColaTiquetes;
 import Configuracion.Configuracion;
 import Configuracion.PilaConfiguracion;
+import Configuracion.SerializacionPila;
 import Configuracion.Terminal;
-import Tiquetes.NodoGenerico;
-
+import javax.swing.JOptionPane;
 
 public class GestorDeAtencion {
-    
- 
- private String tipoBus;
- private String terminal;
- Configuracion configuracion;
- 
 
-    public GestorDeAtencion(String tipoBus, String terminal) {
-        this.tipoBus = tipoBus;
-        this.terminal = terminal;
+    SerializacionPila serializacion;
+    Configuracion configuracion = new Configuracion();
+    PilaConfiguracion<Terminal> pilaTerminales;
+
+    public GestorDeAtencion() {
+
+        this.configuracion = configuracion.deserializar();
+        this.pilaTerminales = configuracion.getPilaTerminal();
     }
-    
-    
- 
-    public void buscarTerminal (String terminalNombre){
-        
-        PilaConfiguracion <Terminal> pila= configuracion.getPilaTerminal();
-        
-        NodoGenerico<Terminal> terminal= pila.buscarTerminal(terminalNombre);
+
+    public void encolarEnBus(Tiquetes tiquete) {
+
+        String nombreTerminal = tiquete.getTerminal();
+        String tipoBus = tiquete.getTipoBus();
+
+        NodoGenerico<Terminal> terminal = pilaTerminales.buscarDato(nombreTerminal);
+        ColaBus colaBus = terminal.getDato().getCola();
+
+        Bus bus = colaBus.buscarBus(tipoBus);
+
+        bus.getColaTiquetes().encolar(tiquete);
+
         
        
-        Bus [] colasBuses= new Bus[terminal.getDato().getCola().longitud()];
-        
-       
-        
-        
+
+        JOptionPane.showMessageDialog(null, "Pasajero agregado a cola del bus " + bus.getTipo() + " de la terminal " + terminal.getDato().getNombre(), "Cola actualizada", JOptionPane.INFORMATION_MESSAGE);
+
     }
-    
-    
-    
-    
-    
+
+    public Bus[] cargarBuses(String nombreTerminal) {
+
+        NodoGenerico<Terminal> terminal = pilaTerminales.buscarDato(nombreTerminal);
+        ColaBus colaBus = terminal.getDato().getCola();
+
+        Bus[] buses = new Bus[colaBus.longitud()];
+        buses = colaBus.almacenarBuses();
+
+        return buses;
+    }
+
+    public Configuracion getConfiguracion() {
+        return configuracion;
+    }
+
+    public PilaConfiguracion<Terminal> getPilaTerminales() {
+        return pilaTerminales;
+    }
+
+    public void setConfiguracion(Configuracion configuracion) {
+        this.configuracion = configuracion;
+    }
+
+    public void setPilaTerminales(PilaConfiguracion<Terminal> pilaTerminales) {
+        this.pilaTerminales = pilaTerminales;
+    }
+
 }

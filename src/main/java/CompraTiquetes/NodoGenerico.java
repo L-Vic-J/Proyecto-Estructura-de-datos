@@ -1,5 +1,5 @@
 
-package Tiquetes;
+package CompraTiquetes;
 
 
 public class NodoGenerico <T> {

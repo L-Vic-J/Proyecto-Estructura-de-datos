@@ -2,6 +2,7 @@
 package Configuracion;
 
 import Configuracion.Bus;
+import java.util.Objects;
 
 public class Terminal{
     String nombreTerminal;
@@ -11,6 +12,7 @@ public class Terminal{
   
 
     public Terminal(String nombre,int cantidad) {
+        
         this.cola= new ColaBus();
         this.nombreTerminal = nombre;
         this.cantidadBuses=cantidad;
@@ -29,6 +31,33 @@ public class Terminal{
 
          
     }
+
+    
+    // Cambio: Se incorpora equals
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Terminal other = (Terminal) obj;
+        return Objects.equals(this.nombreTerminal, other.nombreTerminal);
+    }
+    
+    
+    
+    
     
     //  Cambio: Se incorporan setters y gettes
 

@@ -2,6 +2,7 @@
 package Configuracion;
 
 import Configuracion.Bus;
+import javax.swing.JOptionPane;
 
 
 public class ColaBus {
@@ -62,6 +63,51 @@ public class ColaBus {
         
     }
     
+    
+    public Bus [] almacenarBuses (){
+        
+        if (busInicial==null){
+            System.out.println("La cola esta vacia");
+            
+        }else{
+            Bus actual= busInicial;
+            Bus [] buses= new Bus [longitud ()];
+            int indice = 0;
+            while (actual!=null){
+                buses [indice]= actual;
+                actual=actual.getSiguiente();
+                indice++;
+            }
+                return buses;
+        }
+        
+       return null;
+        
+    }
+    
+    
+    
+    // Cambio: Se agrego metodo para retornar bus
+    
+  public Bus buscarBus (String tipoDeBus){
+       if (busInicial==null){
+            System.out.println("La cola esta vacia");
+            return null;
+            
+        }else{
+           Bus actual= busInicial;
+           while (actual!=null  && !actual.getTipo().equals(tipoDeBus)){
+            actual= actual.getSiguiente();
+        }
+           
+           return actual;
+       }
+      
+      
+      
+  }
+  
+
     
   public int longitud (){
         

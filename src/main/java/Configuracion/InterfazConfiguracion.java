@@ -1,7 +1,7 @@
 
 package Configuracion;
 
-import Tiquetes.NodoGenerico;
+import CompraTiquetes.NodoGenerico;
 import Main.Menu;
 import javax.swing.JOptionPane;
 

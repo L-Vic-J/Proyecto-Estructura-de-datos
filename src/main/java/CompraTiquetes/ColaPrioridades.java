@@ -1,4 +1,4 @@
-package Tiquetes;
+package CompraTiquetes;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

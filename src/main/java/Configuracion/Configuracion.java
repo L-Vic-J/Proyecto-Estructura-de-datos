@@ -2,7 +2,7 @@
 package Configuracion;
 
 import Configuracion.Terminal;
-import Tiquetes.NodoGenerico;
+import CompraTiquetes.NodoGenerico;
 import Configuracion.SerializacionPila;
 
 
@@ -50,7 +50,7 @@ public class Configuracion {
     
     //Metodo para deserializar
     
-    public void deserializar (){
+    /*public void deserializar (){
         
         Configuracion configuracion= serializacionPila.desseralizarPila("config");
         
@@ -59,7 +59,20 @@ public class Configuracion {
         
         System.out.println("El contenido de las pila terminal es:"+ pilaTerminal.Mostrar());
         System.out.println("El contenido de las pila usuario es:"+pilaUsuario.Mostrar());
-    } 
+    } */
+    
+    
+    
+    public Configuracion deserializar (){
+        Configuracion configuracion= new Configuracion();
+        configuracion= serializacionPila.desseralizarPila("config");
+        
+        return configuracion;
+        
+    }
+    
+    
+    
     
     
     //Getters

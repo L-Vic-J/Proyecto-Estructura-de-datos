@@ -1,4 +1,4 @@
-package Tiquetes;
+package CompraTiquetes;
 
 public class Tiquetes {
 
@@ -7,7 +7,8 @@ public class Tiquetes {
     private Tiquetes siguiente;
     private String nombre;
     //Cambio: El id se pone auto incremental, se agrega atributo precio
-    private int id=0;
+    private int contador=1;
+    private int id;
     private int edad;
     private String moneda;
     private String horaCompra;
@@ -25,7 +26,7 @@ public class Tiquetes {
             String horaCompra, String servicio, String tipoBus,String terminal) {
         this.siguiente = null;
         this.nombre = nombre;
-        this.id = id++;
+        this.id = contador++;
         this.edad = edad;
         this.moneda = moneda;
         this.horaCompra = horaCompra;
@@ -146,6 +147,8 @@ public class Tiquetes {
     }
 
 
+  
+    
     public enum prioridadBus {
         VIP,
         Regular,
@@ -153,11 +156,6 @@ public class Tiquetes {
         Ejecutivo,
     }
     
-    public enum tipoBus {
-        P,
-        D,
-        N
-        
-    } 
+
 
 }

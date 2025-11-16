@@ -1,13 +1,17 @@
 
-package Tiquetes;
+package CompraTiquetes;
+
+import AtencionDeClientes.GestorDeAtencion;
 
 
 public class GestorDeCompras {
     
     private ColaPrioridades colaTiquetes = new ColaPrioridades();
-    SerializacionCola serializacion = new SerializacionCola();
+    private SerializacionCola serializacion = new SerializacionCola();
+     private GestorDeAtencion gestorAtencion; 
 
-    public GestorDeCompras() {
+    public GestorDeCompras(GestorDeAtencion gestorAtencion) {
+       this.gestorAtencion=gestorAtencion;
     }
     
    
@@ -28,6 +32,11 @@ public class GestorDeCompras {
       serializacion.serializarPila(colaTiquetes, "tiquetes");
       
       
+  }
+  
+  
+  public void enviarTiquete (Tiquetes tiquete){
+      gestorAtencion.encolarEnBus(tiquete);  
   }
     
     

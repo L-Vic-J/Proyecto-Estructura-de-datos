@@ -1,5 +1,5 @@
 
-package Tiquetes;
+package CompraTiquetes;
 
 import Configuracion.*;
 import com.google.gson.Gson;
