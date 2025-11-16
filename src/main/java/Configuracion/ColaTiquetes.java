@@ -76,13 +76,19 @@ public class ColaTiquetes {
         }
     
     
-    public Tiquetes Desencolar (){
+    public Tiquetes Desencolar (int id){
          if (tiqueteInicial == null) {
           JOptionPane.showMessageDialog(null, "No hay tiquetes pendientes de atender", "Cola del bus", JOptionPane.INFORMATION_MESSAGE);
         } else {
-             Tiquetes tiqueteDesencolar= tiqueteInicial;
-             tiqueteInicial=tiqueteInicial.getSiguiente();
-              return tiqueteDesencolar;
+             Tiquetes actual=tiqueteInicial;
+             while (actual!=null && actual.getId()!=id){
+                 actual=actual.getSiguiente();
+             }
+             Tiquetes tiqueteDesencolar= actual;
+             tiqueteInicial=actual.getSiguiente();
+              JOptionPane.showMessageDialog(null, "Tiquete atendido con exito", "Cola del bus", JOptionPane.INFORMATION_MESSAGE);
+             return tiqueteDesencolar;
+             
 
             }
          

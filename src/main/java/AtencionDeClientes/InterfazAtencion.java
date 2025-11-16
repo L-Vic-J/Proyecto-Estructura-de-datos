@@ -1,103 +1,109 @@
-
 package AtencionDeClientes;
 
 import Configuracion.*;
 import CompraTiquetes.NodoGenerico;
 import CompraTiquetes.Tiquetes;
 import Main.Menu;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class InterfazAtencion extends javax.swing.JFrame {
 
+    public InterfazAtencion(Menu menu, String nombreTerminal, GestorDeAtencion gestorDeAtencion) {
 
-    public InterfazAtencion(Menu menu,String nombreTerminal,GestorDeAtencion gestorDeAtencion) {
-        
         initComponents();
-        
-        this.nombreTerminal=nombreTerminal;
-        this.gestorDeAtencion=gestorDeAtencion;
-      
-        this.terminales= gestorDeAtencion.getPilaTerminales();
-        cargarBuses (nombreTerminal);
-        
+
+        this.nombreTerminal = nombreTerminal;
+        this.gestorDeAtencion = gestorDeAtencion;
+
+        this.terminales = gestorDeAtencion.getPilaTerminales();
+        cargarBuses(nombreTerminal);
+
         setLocationRelativeTo(null);
-        
-        DefaultTableModel modelo = new DefaultTableModel ();
+
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Servicio");
         modelo.addColumn("Tipo de bus");
         modelo.addColumn("Terminal");
+
         
+        buttonAbordar.setEnabled(false);
         tablaTiquetes.setModel(modelo);
-        
-        this.menu=menu;
+
+        this.menu = menu;
     }
 
-    
-    
-    public void cargarBuses (String nombre){
-        
+    public void cargarBuses(String nombre) {
 
-        Bus [] buses= gestorDeAtencion.cargarBuses(nombre);
-        
-        
-        for (int i=0; i<buses.length;i++) {
-           comboBoxBuses.addItem(buses[i].getTipo());
+        Bus[] buses = gestorDeAtencion.cargarBuses(nombre);
+
+        for (int i = 0; i < buses.length; i++) {
+            comboBoxBuses.addItem(buses[i].getTipo());
         }
-        
+
     }
-    
-    
-    public DefaultTableModel cargarTiquetes (){
-        
-        String tipoDeBus= String.valueOf(comboBoxBuses.getSelectedItem());
-        NodoGenerico <Terminal> terminal=terminales.buscarDato(this.nombreTerminal);
+
+    public DefaultTableModel cargarTiquetes() {
+
+        String tipoDeBus = String.valueOf(comboBoxBuses.getSelectedItem());
+        NodoGenerico<Terminal> terminal = terminales.buscarDato(this.nombreTerminal);
         System.out.println(terminal.getDato().getNombre());
-        ColaBus buses= terminal.getDato().getCola();
+        ColaBus buses = terminal.getDato().getCola();
         System.out.println(buses.Mostrar());
-        Bus bus= buses.buscarBus(tipoDeBus);
-        
-        
-        Tiquetes [] tiquetes=bus.getColaTiquetes().recorrer();
-        
-        
-        DefaultTableModel modelo = new DefaultTableModel ();
+        Bus bus = buses.buscarBus(tipoDeBus);
+
+        textFieldID.setVisible(false);
+
+
+        Tiquetes[] tiquetes = bus.getColaTiquetes().recorrer();
+
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Servicio");
         modelo.addColumn("Tipo de bus");
         modelo.addColumn("Terminal");
-        
-        for (int i=0;i<tiquetes.length;i++){
-            
+
+        for (int i = 0; i < tiquetes.length; i++) {
+
             modelo.addRow(new Object[]{
-                
                 tiquetes[i].getId(),
                 tiquetes[i].getNombre(),
                 tiquetes[i].getServicio(),
                 tiquetes[i].getTipoBus(),
-                tiquetes[i].getTerminal(),
-            });
+                tiquetes[i].getTerminal(),});
         }
-       
+
         return modelo;
-            
+
     }
-    
-    
-    public void Abordar (){
+
+    public void Abordar() {
         
+        String idString= textFieldID.getText();
         
+        int id= Integer.parseInt(idString);
         
- 
+        String tipoDeBus = String.valueOf(comboBoxBuses.getSelectedItem());
+        NodoGenerico<Terminal> terminal = terminales.buscarDato(this.nombreTerminal);
+        ColaBus buses = terminal.getDato().getCola();
+        Bus bus = buses.buscarBus(tipoDeBus);
+        Tiquetes tiqueteAtendido=bus.getColaTiquetes().Desencolar(id);
+        SimpleDateFormat formatoFecha= new SimpleDateFormat("HH:mm:ss");
+        String fecha= formatoFecha.format(new Date());
+        tiqueteAtendido.setHoraAbordaje(fecha);
+        tiqueteAtendido.setEstado("Atendido");
+      
+        SerializacionAtendidos atendidos= new SerializacionAtendidos();
+        atendidos.serializarTiquete(tiqueteAtendido,"Atendidos");
+        tablaTiquetes.setModel(cargarTiquetes());
         
-        
-        
+
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -114,6 +120,7 @@ public class InterfazAtencion extends javax.swing.JFrame {
         comboBoxBuses = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        textFieldID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -222,6 +229,14 @@ public class InterfazAtencion extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, -1, -1));
 
+        textFieldID.setText("jTextField1");
+        textFieldID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(textFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,8 +252,8 @@ public class InterfazAtencion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
-       menu.setVisible(true);
-       this.dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_buttonVolverActionPerformed
 
     private void comboBoxBusesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxBusesActionPerformed
@@ -246,31 +261,37 @@ public class InterfazAtencion extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxBusesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DefaultTableModel modelo=cargarTiquetes();
+        DefaultTableModel modelo = cargarTiquetes();
         tablaTiquetes.setModel(modelo);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonAbordarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAbordarActionPerformed
-        // TODO add your handling code here:
+       String id= textFieldID.getText();
+       Abordar();
+       
+  
     }//GEN-LAST:event_buttonAbordarActionPerformed
 
     private void tablaTiquetesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTiquetesMousePressed
-        // TODO add your handling code here:
+        int fila = tablaTiquetes.getSelectedRow();
+
+        
+        buttonAbordar.setEnabled(true);
+        
+        textFieldID.setText(tablaTiquetes.getValueAt(fila, 0).toString());
+       
     }//GEN-LAST:event_tablaTiquetesMousePressed
 
+    private void textFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldIDActionPerformed
 
-
-       
-
-       
-
-    
     private String nombreTerminal;
-    private PilaConfiguracion <Terminal> terminales= new PilaConfiguracion<>();
-    private GestorDeAtencion gestorDeAtencion= new GestorDeAtencion();
-    private Menu menu= new Menu ();
-    private Configuracion configuracion= new Configuracion ();
-    private int fila=0;
+    private PilaConfiguracion<Terminal> terminales = new PilaConfiguracion<>();
+    private GestorDeAtencion gestorDeAtencion = new GestorDeAtencion();
+    private Menu menu = new Menu();
+    private Configuracion configuracion = new Configuracion();
+    private int fila = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAbordar;
@@ -284,5 +305,6 @@ public class InterfazAtencion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaTiquetes;
+    private javax.swing.JTextField textFieldID;
     // End of variables declaration//GEN-END:variables
 }
