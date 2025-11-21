@@ -1,1 +1,1 @@
-{"colaTiquetes":{},"serializacion":{},"gestorAtencion":{"configuracion":{"pilaTerminal":{},"pilaUsuario":{},"serializacionPila":{}},"pila":{}}}
+{"colaTiquetes":{"tiqueteInicio":{"nombre":"fadf","contador":2,"id":1,"edad":3,"moneda":"Dólares","horaCompra":"23:51:33","servicio":"Regular","tipoBus":"Directo","terminal":"23","estado":"Pendiente","precio":0.0},"tiqueteFin":{"nombre":"fadf","contador":2,"id":1,"edad":3,"moneda":"Dólares","horaCompra":"23:51:33","servicio":"Regular","tipoBus":"Directo","terminal":"23","estado":"Pendiente","precio":0.0}},"serializacion":{}}

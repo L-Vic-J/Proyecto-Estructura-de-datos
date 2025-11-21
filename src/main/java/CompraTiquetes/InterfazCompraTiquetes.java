@@ -1,6 +1,4 @@
-
 package CompraTiquetes;
-
 
 import AtencionDeClientes.GestorDeAtencion;
 import Configuracion.Configuracion;
@@ -12,35 +10,25 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
-
 public class InterfazCompraTiquetes extends javax.swing.JFrame {
 
-
-    public InterfazCompraTiquetes(Menu menu,GestorDeAtencion gestorAtencion) {
+    public InterfazCompraTiquetes(Menu menu, GestorDeAtencion gestorAtencion) {
 
         initComponents();
-        this.gestorAtencion=gestorAtencion;
-        this.menu=menu;
-        this.gestorDeCompras=new GestorDeCompras(gestorAtencion);
-        
+        this.gestorAtencion = gestorAtencion;
+        this.menu = menu;
+        this.gestorDeCompras = new GestorDeCompras(gestorAtencion);
+
         // Se cargan los nombres de terminales registrados en el archivo config al combobox de terminales
-        
-        configuracion=serializacion.desseralizarPila("config");
-        NodoGenerico<Terminal>[] listaTerminales=configuracion.getPilaTerminal().almacedarDatos();
-        String [] nombresTerminales= new String [listaTerminales.length];
-        
-        for (int i=0; i<listaTerminales.length;i++) {
-           comboBoxTerminal.addItem(listaTerminales[i].getDato().getNombre());
+        configuracion = serializacion.desseralizarPila("config");
+        NodoGenerico<Terminal>[] listaTerminales = configuracion.getPilaTerminal().almacedarDatos();
+        String[] nombresTerminales = new String[listaTerminales.length];
+
+        for (int i = 0; i < listaTerminales.length; i++) {
+            comboBoxTerminal.addItem(listaTerminales[i].getDato().getNombre());
         }
-        
-        
-        
+
     }
-
-    
-
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -163,6 +151,11 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
         jPanel1.add(comboBoxTipoDeBus, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 150, -1));
 
         comboBoxServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VIP", "Regular", "Carga", "Ejecutivo" }));
+        comboBoxServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxServicioActionPerformed(evt);
+            }
+        });
         jPanel1.add(comboBoxServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 150, -1));
 
         textFieldNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -215,8 +208,8 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
-       menu.setVisible(true);
-       this.dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_buttonVolverActionPerformed
 
     private void textFieldCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCargaActionPerformed
@@ -232,58 +225,92 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldEdadActionPerformed
 
     private void ComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarActionPerformed
-     
-       comprarTiquete ();
-       limpiar();
-       
+
+        comprarTiquete();
+        limpiar();
+
     }//GEN-LAST:event_ComprarActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-       gestorDeCompras.Serializar();
+        gestorDeCompras.Serializar();
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void comboBoxTipoDeBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoDeBusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxTipoDeBusActionPerformed
 
+    private void comboBoxServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxServicioActionPerformed
 
- 
-       
 // Se genera el tiquete con sus atributos, Cambio: Aca se genera la hora de compra
-    public void comprarTiquete (){
-        
-      
+    public void comprarTiquete() {
         try {
-            String nombre= textFieldNombre.getText();
-        int edad= Integer.valueOf(textFieldEdad.getText());
-        String moneda= String.valueOf(comboBoxMoneda.getSelectedItem());
-        String servicio= String.valueOf(comboBoxServicio.getSelectedItem());
-       
-        String tipoBus=String.valueOf(comboBoxTipoDeBus.getSelectedItem()).trim();
-        
-        String terminal= String.valueOf(comboBoxTerminal.getSelectedItem());
-        
-        String horaActual = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        
-       
-        Tiquetes tiquete = new Tiquetes(nombre, edad, moneda,horaActual, servicio, tipoBus,terminal);
-        
-        gestorDeCompras.agregarTiquete(tiquete);
-        
-        gestorDeCompras.enviarTiquete(tiquete);
-        
-        
-        }catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"En los campos de edad y carga solo debe ingresar números","Error al generar tiquete", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
+            String nombre = textFieldNombre.getText();
+            int edad = Integer.parseInt(textFieldEdad.getText());
+            String moneda = String.valueOf(comboBoxMoneda.getSelectedItem());
+            String servicio = String.valueOf(comboBoxServicio.getSelectedItem());
+            String tipoBus = String.valueOf(comboBoxTipoDeBus.getSelectedItem()).trim();
+            String terminal = String.valueOf(comboBoxTerminal.getSelectedItem());
+            String horaActual = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
+            Object terminalSeleccionado = comboBoxTerminal.getSelectedItem();
+            if (terminalSeleccionado == null) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una terminal.");
+                return;
+            }
+
+            // Calcular monto
+            double monto = calcularMonto(servicio, tipoBus);
+            if (monto < 0) {
+                return; // Error en peso de carga
+            }
+            // Confirmar pago
+            int respuesta = JOptionPane.showConfirmDialog(null,
+                    "El monto a pagar es: $" + monto + "\n¿Acepta pagar al subir al bus?",
+                    "Confirmar pago", JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(null, "Pasajero rechazado. Reinicie el proceso.");
+                return;
+            }
+
+            // Crear y registrar tiquete
+            Tiquetes tiquete = new Tiquetes(nombre, edad, moneda, horaActual, servicio, tipoBus, terminal);
+            gestorDeCompras.agregarTiquete(tiquete);
+            gestorDeCompras.enviarTiquete(tiquete);
+
+            JOptionPane.showMessageDialog(null, "Tiquete generado con éxito.");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "En los campos de edad y carga solo debe ingresar números",
+                    "Error al generar tiquete", JOptionPane.ERROR_MESSAGE);
+        }
     }
- 
-    
-    public void limpiar(){
-        
+
+    private double calcularMonto(String servicio, String tipoBus) {
+        switch (servicio.toLowerCase()) {
+            case "vip":
+                return 100;
+            case "regular":
+                return 20;
+            case "carga":
+                try {
+                    double peso = Double.parseDouble(textFieldCarga.getText());
+                    return 20 + (10 * peso);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un peso válido para la carga.");
+                    return -1;
+                }
+            case "ejecutivo":
+                return 100;
+            default:
+                return 0;
+        }
+    }
+
+    public void limpiar() {
+
         textFieldNombre.setText("");
         textFieldEdad.setText("");
         comboBoxMoneda.setSelectedIndex(1);
@@ -292,14 +319,13 @@ public class InterfazCompraTiquetes extends javax.swing.JFrame {
         comboBoxTipoDeBus.setSelectedIndex(1);
         comboBoxTerminal.setSelectedIndex(1);
     }
-    
-    
- private Menu menu= new Menu ();
- private Configuracion configuracion;
- private SerializacionPila serializacion= new SerializacionPila ();
- private GestorDeAtencion gestorAtencion;
- private GestorDeCompras gestorDeCompras;
- 
+
+    private Menu menu = new Menu();
+    private Configuracion configuracion;
+    private SerializacionPila serializacion = new SerializacionPila();
+    private GestorDeAtencion gestorAtencion;
+    private GestorDeCompras gestorDeCompras;
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Comprar;
