@@ -5,6 +5,7 @@ public class Pasajero {
     private String nombre;
     private String tipoServicio;
     private double pesoCarga; // solo si es tipo "Carga"
+    private String estado;
 
     public Pasajero(String nombre, String tipoServicio, double pesoCarga) {
         this.nombre = nombre;
@@ -22,5 +23,12 @@ public class Pasajero {
 
     public double getPesoCarga() {
         return pesoCarga;
+    }
+    public void setEstado(String estado) {
+    this.estado = estado;
+    }
+
+    public String getEstado() {
+    return estado;
     }
 }

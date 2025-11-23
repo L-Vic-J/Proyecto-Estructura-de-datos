@@ -1,5 +1,7 @@
 package Configuracion;
 
+import CompraTiquetes.Pasajero;
+
 public class Bus {
     
     
@@ -12,9 +14,7 @@ public class Bus {
     public Bus() {
     }
 
-    
-    
-    
+
     public Bus(String tipo) {
         this.tipo = tipo;
         this.bus = null;
@@ -61,6 +61,14 @@ public class Bus {
     public String toString() {
         return "Tipos de bus:"+tipo;
     }
+
+    public void subirPasajero(Pasajero actual) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+  
+    
+  
     
     
     

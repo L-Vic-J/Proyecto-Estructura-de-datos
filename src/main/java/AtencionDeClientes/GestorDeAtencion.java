@@ -2,6 +2,7 @@ package AtencionDeClientes;
 
 import CompraTiquetes.NodoGenerico;
 import CompraTiquetes.Tiquetes;
+import CompraTiquetes.Pasajero;
 import Configuracion.Bus;
 import Configuracion.ColaBus;
 import Configuracion.ColaTiquetes;
@@ -12,15 +13,44 @@ import Configuracion.Terminal;
 import javax.swing.JOptionPane;
 
 public class GestorDeAtencion {
+    private ColaPasajeros fila;
+    private Inspector inspector;
+    private Bus bus;
 
     SerializacionPila serializacion;
     Configuracion configuracion = new Configuracion();
     PilaConfiguracion<Terminal> pilaTerminales;
 
     public GestorDeAtencion() {
-
+        
         this.configuracion = configuracion.deserializar();
         this.pilaTerminales = configuracion.getPilaTerminal();
+    }
+    
+    public GestorDeAtencion(Bus bus){
+        this.bus = bus;
+        this.fila = new ColaPasajeros();
+        this.inspector = new Inspector();
+    }
+    
+    public void agregarPasajeroAfila(Pasajero p ){
+        fila.encolar(p);
+    }
+    
+    public void procesarFila(){
+        while(!fila.estaVacia()){
+            Pasajero actual = fila.desencolar();
+            
+            boolean paga = inspector.revisarPasajero(actual);
+            
+            if (paga){
+                actual.setEstado("Atendido");
+                bus.subirPasajero(actual);
+                System.out.println("Subio al bus: " + actual.getNombre());
+            }else{
+                System.out.println("Rechazo el pago y fue elimando: " + actual.getNombre());
+            }
+        }
     }
 
     public void encolarEnBus(Tiquetes tiquete) {
