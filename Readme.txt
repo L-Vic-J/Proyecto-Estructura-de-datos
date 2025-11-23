@@ -1,6 +1,6 @@
 Avance 2:
 
-Integrantes participantes: Victor Leiton Jimenez, Joseph Cardoza Valdelomar, David Carmona Solórzano, Emmanuell Siles Loaiza.
+Integrantes participantes: Victor Leiton Jimenez, Joseph Cardoza Valdelomar, David Carmona Solórzano, Emmanuell Siles Loaiza, Emanuel Silva Sánchez.
 
 Requerimientos implementados: 
 
