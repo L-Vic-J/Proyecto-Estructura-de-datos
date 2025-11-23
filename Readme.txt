@@ -129,3 +129,40 @@ public void Abordar (): Este método se hace cargo de buscar el tiquete especifi
 private void tablaTiquetesMousePressed(java.awt.event.MouseEvent evt): Este evento permite que podamos elegir el tiquete al hacerle click en la tabla y establecerlo en un label que esta oculto, el contenido ese label que es el ID del tiquete es el ID que se usa Abordar.
 
 Modulo 1.3:
+
+Clase ColaParaListadeBuses
+
+La clase ColaParaListadeBuses implementa una estructura de datos tipo cola para gestionar tiquetes asignados a buses dentro de una terminal. Utiliza nodos genéricos (NodoGenerico) que encapsulan objetos de tipo Tiquetes, permitiendo una gestión ordenada
+
+public ColaParaListadeBuses() : Constructor que inicializa la cola vacía, con frente y fin en null, y cantidad en 0.
+
+public void encolar (Tiquetes t): Agrega un nuevo tiquete al final de la cola. Si la cola está vacía, el nuevo nodo se convierte en el frente y el fin. Si no, se enlaza al final.
+
+public int getCantidad(): Retorna la cantidad actual de tiquetes en la cola.
+
+public void setCantidad(int cantidad): Permite establecer manualmente la cantidad de elementos (uso interno o en pruebas).
+
+public NodoGenerico getFrente(): Retorna el nodo que está al frente de la cola.
+
+public void setFrente(NodoGenerico frente): Establece el nodo que estará al frente de la cola.
+
+public NodoGenerico getFin(): Retorna el nodo que está al final de la cola.
+
+public void setFin(NodoGenerico fin): Establece el nodo que estará al final de la cola.
+
+Clase ListaDeBuses
+
+La clase ListaDeBuses implementa una lista enlazada simple de objetos tipo Bus, encapsulados en nodos de tipo Nodobus. Su propósito principal es organizar y recorrer los buses disponibles en una terminal, permitiendo además identificar el bus con menor carga de tiquetes en su cola.
+
+public ListaDeBuses(): Constructor que inicializa la lista vacía, estableciendo inicio en null.
+
+public void agregarBus(Bus b) : Agrega un nuevo bus al final de la lista. Si la lista está vacía, el nuevo nodo se convierte en el inicio. Si no, se recorre hasta el último nodo y se enlaza el nuevo bus.
+
+public Bus buscarBusConMenorFila(): Busca el bus de tipo "NORMAL" con la menor cantidad de tiquetes en su cola (colaParaListadeBuses). Recorre la lista y compara las cantidades para retornar el más liviano.
+
+public void setInicio(Nodobus inicio) :Permite establecer manualmente el nodo inicial de la lista.
+
+Nodobus: Nodo que encapsula un objeto Bus y referencia al siguiente nodo.
+
+Bus: Clase que representa un bus, incluyendo su tipo y su cola de tiquetes (colaParaListadeBuses).
+
