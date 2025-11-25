@@ -11,9 +11,7 @@ import java.io.FileWriter;
 
 public class SerializacionAtendidos {
     
-        
-    
-    
+
      public SerializacionAtendidos(){
     }
 

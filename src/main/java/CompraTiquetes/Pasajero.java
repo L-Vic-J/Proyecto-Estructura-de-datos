@@ -4,7 +4,7 @@ public class Pasajero {
 
     private String nombre;
     private String tipoServicio;
-    private double pesoCarga; // solo si es tipo "Carga"
+    private double pesoCarga;
     private String estado;
 
     public Pasajero(String nombre, String tipoServicio, double pesoCarga) {

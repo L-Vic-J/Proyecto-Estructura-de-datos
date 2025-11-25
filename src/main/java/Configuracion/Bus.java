@@ -4,9 +4,6 @@ import CompraTiquetes.Pasajero;
 
 public class Bus {
     
-    
-    //Atributos de clase
-     
     String tipo;
     Bus bus;
     ColaTiquetes colaTiquetes;
@@ -14,15 +11,12 @@ public class Bus {
     public Bus() {
     }
 
-
     public Bus(String tipo) {
         this.tipo = tipo;
         this.bus = null;
         this.colaTiquetes= new ColaTiquetes();
     }
     
-   
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -54,8 +48,6 @@ public class Bus {
     public ColaTiquetes getColaTiquetes() {
         return colaTiquetes;
     }
-    
-    
 
     @Override
     public String toString() {
